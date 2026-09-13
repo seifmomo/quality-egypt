@@ -41,7 +41,26 @@ export default function Header() {
           : 'bg-white/80 backdrop-blur-md border-b border-transparent'
       }`}
     >
-      <span className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-accent-400 via-accent-600 to-gold-400" aria-hidden="true" />
+      <span className="absolute top-0 inset-x-0 z-20 h-px bg-gradient-to-r from-transparent via-gold-500/70 to-transparent" aria-hidden="true" />
+      <div
+        className={`hidden xl:block bg-ink-950 text-white overflow-hidden transition-all duration-300 ${
+          scrolled ? 'h-0' : 'h-9'
+        }`}
+      >
+          <div className="mx-auto max-w-7xl px-8 h-9 flex items-center justify-between text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-ink-200">
+            <span>
+              Since {site.founded} — Egyptian Engineering Projects Co.
+            </span>
+            <div className="flex items-center gap-8">
+              <a href={`tel:${site.phoneHref}`} className="hover:text-white transition-colors" dir="ltr">
+                {site.phone}
+              </a>
+              <a href={`mailto:${site.email}`} className="hover:text-white transition-colors" dir="ltr">
+                {site.email}
+              </a>
+            </div>
+          </div>
+      </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-6 h-[4.5rem]">
           <Link to="/" aria-label={site.name}>
@@ -59,8 +78,8 @@ export default function Header() {
                     to={item.to}
                     end={item.to === '/'}
                     className={({ isActive }) =>
-                      `px-3 py-2 rounded-lg text-[0.85rem] font-semibold transition-colors ${
-                        isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-100/60'
+                      `relative px-3.5 py-2 rounded-lg text-[0.78rem] font-semibold uppercase tracking-[0.12em] transition-colors after:absolute after:left-3.5 after:right-3.5 after:-bottom-0.5 after:h-px after:bg-gold-500 after:transition-transform after:scale-x-0 hover:after:scale-x-100 ${
+                        isActive ? 'text-accent-600 after:scale-x-100' : 'text-ink-600 hover:text-ink-900'
                       }`
                     }
                   >
@@ -74,13 +93,13 @@ export default function Header() {
                     to={item.to}
                     end={false}
                     className={({ isActive }) =>
-                      `inline-flex items-center gap-1 px-3 py-2 rounded-lg text-[0.85rem] font-semibold transition-colors ${
-                        isActive ? 'text-accent-600' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-100/60'
+                      `relative inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-[0.78rem] font-semibold uppercase tracking-[0.12em] transition-colors after:absolute after:left-3.5 after:right-3.5 after:-bottom-0.5 after:h-px after:bg-gold-500 after:transition-transform after:scale-x-0 hover:after:scale-x-100 ${
+                        isActive ? 'text-accent-600 after:scale-x-100' : 'text-ink-600 hover:text-ink-900'
                       }`
                     }
                   >
                     {item.label}
-                    <ChevronDown size={14} className="text-ink-400 group-hover:text-accent-500 transition-colors" />
+                    <ChevronDown size={13} className="text-ink-400 group-hover:text-accent-500 transition-colors" />
                   </NavLink>
 
                   <div
@@ -89,7 +108,7 @@ export default function Header() {
                     <div className="w-80 rounded-2xl bg-white shadow-lift ring-1 ring-ink-100 p-2 max-h-[70vh] overflow-y-auto">
                       <Link
                         to={item.to}
-                        className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[0.78rem] font-bold uppercase tracking-wide text-ink-900 hover:text-accent-700 hover:bg-accent-400/10 transition-colors"
+                        className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-ink-900 hover:text-accent-700 hover:bg-accent-400/10 transition-colors"
                       >
                         View all
                         <ArrowRight size={13} />
@@ -99,7 +118,7 @@ export default function Header() {
                         <Link
                           key={c.to}
                           to={c.to}
-                          className="block px-4 py-2.5 rounded-xl text-[0.85rem] font-semibold text-ink-600 hover:text-accent-700 hover:bg-accent-400/10 transition-colors"
+                          className="block px-4 py-2.5 rounded-xl font-display text-[0.95rem] text-ink-700 hover:text-accent-700 hover:bg-accent-400/10 transition-colors"
                         >
                           {c.label}
                         </Link>
@@ -114,10 +133,10 @@ export default function Header() {
           <div className="hidden xl:flex items-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white bg-accent-500 hover:bg-accent-600 shadow-card transition-colors"
+              className="btn btn-dark !px-5 !py-2.5 !text-[0.72rem]"
             >
               Start a Project
-              <ArrowRight size={15} />
+              <ArrowRight size={14} />
             </Link>
           </div>
 
@@ -146,7 +165,7 @@ export default function Header() {
                     end={item.to === '/'}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `block px-4 py-3 rounded-xl text-[0.95rem] font-semibold ${
+                      `block px-4 py-3 rounded-xl font-display text-[1.05rem] font-medium ${
                         isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-700 hover:bg-ink-50'
                       }`
                     }
@@ -162,7 +181,7 @@ export default function Header() {
                       to={item.to}
                       onClick={() => setOpen(false)}
                       className={({ isActive }) =>
-                        `flex-1 px-4 py-3 rounded-xl text-[0.95rem] font-semibold ${
+                        `flex-1 px-4 py-3 rounded-xl font-display text-[1.05rem] font-medium ${
                           isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-700'
                         }`
                       }
@@ -186,7 +205,7 @@ export default function Header() {
                           key={c.to}
                           to={c.to}
                           onClick={() => setOpen(false)}
-                          className="block px-4 py-2.5 rounded-xl text-[0.85rem] font-semibold text-ink-600 hover:text-accent-700 hover:bg-accent-400/10"
+                          className="block px-4 py-2.5 rounded-xl font-display text-[0.95rem] text-ink-600 hover:text-accent-700 hover:bg-accent-400/10"
                         >
                           {c.label}
                         </Link>
@@ -200,7 +219,7 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-full text-sm font-bold text-white bg-accent-500"
+                className="btn btn-dark w-full"
               >
                 Start a Project
                 <ArrowRight size={15} />

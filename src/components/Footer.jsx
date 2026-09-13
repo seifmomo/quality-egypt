@@ -29,20 +29,20 @@ const footerGroups = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-ink-950 text-ink-200">
-      <span className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-accent-400 via-accent-600 to-gold-400" aria-hidden="true" />
-      <div className="absolute inset-0 bg-grid-dark opacity-40" aria-hidden="true" />
+    <footer className="relative overflow-hidden bg-ink-950 text-ink-200">
+      <span className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid-dark opacity-30" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-10">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+        <div className="grid gap-14 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
           {/* Brand */}
           <div>
-            <img src="/quality-egypt/images/logo-light.png" alt={site.name} className="h-10 w-auto" loading="lazy" />
-            <p className="mt-5 text-sm leading-7 text-ink-300 max-w-sm">
+            <img src="/quality-egypt/images/logo-light.png" alt={site.name} className="h-11 w-auto" loading="lazy" />
+            <p className="mt-6 text-sm leading-8 text-ink-300 max-w-sm">
               A leading ELV systems integrator and commercial contractor since {site.founded} — engineering,
               procuring, installing and maintaining the systems behind Egypt’s most iconic landmarks.
             </p>
-            <div className="mt-6 flex gap-2.5">
+            <div className="mt-7 flex gap-2.5">
               {site.socials.map((s) => (
                 <a
                   key={s.label}
@@ -50,9 +50,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.label}
-                  className="grid place-items-center h-10 w-10 rounded-full border border-white/10 text-ink-300 hover:text-ink-950 hover:bg-accent-400 hover:border-accent-400 transition-colors"
+                  className="grid place-items-center h-10 w-10 rounded-full border border-white/15 text-ink-300 hover:text-ink-950 hover:bg-gold-400 hover:border-gold-400 transition-colors"
                 >
-                  <span className="text-sm font-bold">{s.label[0]}</span>
+                  <span className="text-[0.7rem] font-bold uppercase tracking-wide">{s.label[0]}</span>
                 </a>
               ))}
             </div>
@@ -61,8 +61,9 @@ export default function Footer() {
           {/* Link groups */}
           {footerGroups.map((g) => (
             <div key={g.title}>
-              <h3 className="text-sm font-bold text-white tracking-wide">{g.title}</h3>
-              <ul className="mt-5 space-y-3">
+              <h3 className="font-display text-lg text-white">{g.title}</h3>
+              <span className="mt-3 block h-px w-8 bg-gold-500/70" aria-hidden="true" />
+              <ul className="mt-6 space-y-3.5">
                 {g.links.map((l) => (
                   <li key={l.label}>
                     <Link to={l.to} className="text-sm text-ink-300 hover:text-accent-300 transition-colors">
@@ -76,22 +77,23 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-bold text-white tracking-wide">Contact</h3>
-            <ul className="mt-5 space-y-4 text-sm text-ink-300">
+            <h3 className="font-display text-lg text-white">Contact</h3>
+            <span className="mt-3 block h-px w-8 bg-gold-500/70" aria-hidden="true" />
+            <ul className="mt-6 space-y-5 text-sm text-ink-300">
               <li className="flex gap-3">
-                <MapPin size={17} className="shrink-0 text-accent-400 mt-0.5" />
+                <MapPin size={17} className="shrink-0 text-gold-400 mt-0.5" />
                 <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="hover:text-accent-300 transition-colors">
                   {site.address}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Phone size={17} className="shrink-0 text-accent-400 mt-0.5" />
+                <Phone size={17} className="shrink-0 text-gold-400 mt-0.5" />
                 <a href={`tel:${site.phoneHref}`} className="hover:text-accent-300 transition-colors" dir="ltr">
                   {site.phone}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Mail size={17} className="shrink-0 text-accent-400 mt-0.5" />
+                <Mail size={17} className="shrink-0 text-gold-400 mt-0.5" />
                 <a href={`mailto:${site.email}`} className="hover:text-accent-300 transition-colors" dir="ltr">
                   {site.email}
                 </a>
@@ -100,11 +102,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
           <p className="text-xs text-ink-400">
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-xs">
             {nav.slice(1).map((n) => (
               <Link key={n.to} to={n.to} className="text-ink-300 hover:text-accent-300 transition-colors">
                 {n.label}
@@ -114,11 +116,18 @@ export default function Footer() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             aria-label="Back to top"
-            className="grid place-items-center h-10 w-10 rounded-full border border-white/10 text-ink-300 hover:text-ink-950 hover:bg-accent-400 transition-colors"
+            className="grid place-items-center h-11 w-11 rounded-full border border-white/15 text-ink-200 hover:text-ink-950 hover:bg-gold-400 transition-colors"
           >
             <ArrowUp size={16} />
           </button>
         </div>
+      </div>
+
+      {/* Giant watermark */}
+      <div className="relative pointer-events-none select-none" aria-hidden="true">
+        <span className="block font-display italic text-center text-[19vw] leading-[0.8] text-white/[0.025] tracking-tight">
+          Quality
+        </span>
       </div>
     </footer>
   )

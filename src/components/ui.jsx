@@ -49,13 +49,20 @@ export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' })
 }
 
 /* Section heading block */
-export function SectionHeading({ eyebrow, title, desc, align = 'start', dark = false }) {
+export function SectionHeading({ eyebrow, title, desc, align = 'start', dark = false, index }) {
   return (
     <div className={`max-w-2xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
       <Reveal>
-        <span className={`eyebrow ${align === 'center' ? 'justify-center' : ''}`}>{eyebrow}</span>
+        <div className={`flex items-center gap-4 ${align === 'center' ? 'justify-center' : ''}`}>
+          <span className={`eyebrow ${align === 'center' ? '' : ''}`}>{eyebrow}</span>
+          {index && (
+            <span className={`font-display text-2xl italic leading-none ${dark ? 'text-accent-300/40' : 'text-gold-500/70'}`}>
+              {index}
+            </span>
+          )}
+        </div>
         <h2
-          className={`mt-3 text-3xl md:text-4xl font-extrabold tracking-tight ${
+          className={`mt-4 ${align === 'center' ? 'mx-auto' : ''} max-w-3xl text-4xl md:text-5xl leading-[1.12] font-semibold ${
             dark ? 'text-white' : 'text-ink-900'
           }`}
         >
@@ -64,7 +71,9 @@ export function SectionHeading({ eyebrow, title, desc, align = 'start', dark = f
       </Reveal>
       {desc && (
         <Reveal delay={80}>
-          <p className={`mt-4 text-base md:text-lg leading-8 ${dark ? 'text-ink-200' : 'text-ink-500'}`}>{desc}</p>
+          <p className={`mt-5 ${align === 'center' ? 'mx-auto' : 'max-w-xl'} text-base md:text-[1.05rem] leading-8 ${dark ? 'text-ink-200' : 'text-ink-500'}`}>
+            {desc}
+          </p>
         </Reveal>
       )}
     </div>
@@ -74,28 +83,29 @@ export function SectionHeading({ eyebrow, title, desc, align = 'start', dark = f
 /* Hero band for inner pages */
 export function PageHero({ title, desc, crumb }) {
   return (
-    <section className="relative overflow-hidden bg-ink-950 text-white">
+    <section className="relative overflow-hidden bg-ink-950 text-white bg-noise">
       <div className="absolute inset-0 bg-grid-dark opacity-60" aria-hidden="true" />
       <div className="absolute -top-32 end-[-10%] w-[34rem] h-[34rem] rounded-full bg-accent-500/15 blur-3xl" aria-hidden="true" />
       <div className="absolute -bottom-40 start-[-8%] w-[30rem] h-[30rem] rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
       <span className="absolute top-0 end-0 h-[3px] w-1/2 bg-gradient-to-l from-accent-400 to-transparent" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-20 md:pt-32 md:pb-24">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-24 md:pt-36 md:pb-28">
         <Reveal>
-          <div className="flex items-center gap-2 text-xs font-semibold text-ink-300 mb-5">
+          <div className="flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink-300 mb-6">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
-            <span className="text-accent-400">/</span>
+            <span className="text-gold-500">/</span>
             <span className="text-white">{crumb}</span>
           </div>
         </Reveal>
-        <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold leading-tight max-w-3xl">
+        <h1 className="text-5xl md:text-6xl xl:text-7xl leading-[1.05] max-w-3xl">
           {title}
         </h1>
         {desc && (
           <Reveal delay={80}>
-            <p className="mt-6 text-lg md:text-xl leading-9 text-ink-200 max-w-2xl">{desc}</p>
+            <p className="mt-8 text-lg md:text-xl leading-9 text-ink-200 max-w-2xl">{desc}</p>
           </Reveal>
         )}
+        <div className="mt-12 h-px w-24 bg-gradient-to-r from-gold-500 to-transparent" aria-hidden="true" />
       </div>
     </section>
   )
@@ -104,30 +114,27 @@ export function PageHero({ title, desc, crumb }) {
 /* CTA band reused across pages */
 export function CtaBand() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-ink-900 via-ink-800 to-accent-600 text-white">
+    <section className="relative overflow-hidden bg-ink-950 text-white bg-noise">
       <div className="absolute inset-0 bg-grid-dark opacity-50" aria-hidden="true" />
-      <span className="absolute top-0 start-0 h-full w-1 bg-gradient-to-b from-accent-400 to-transparent" aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <div className="absolute -top-40 end-0 w-[36rem] h-[36rem] rounded-full bg-accent-500/15 blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-44 start-[-6%] w-[30rem] h-[30rem] rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
+      <span className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-28 text-center">
         <Reveal>
-          <span className="eyebrow justify-center">{`Let's Build Together`}</span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight max-w-2xl mx-auto">
+          <span className="eyebrow on-dark justify-center">{`Let's Build Together`}</span>
+          <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl leading-[1.1] max-w-3xl mx-auto">
             Ready to engineer your next landmark project?
           </h2>
-          <p className="mt-5 text-ink-200 text-lg max-w-xl mx-auto">
+          <p className="mt-6 text-ink-200 text-lg md:text-xl max-w-xl mx-auto">
             Talk to our engineering team about your requirements — from single systems to fully integrated builds.
           </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-ink-950 bg-accent-400 hover:bg-accent-300 shadow-glow transition-colors"
-            >
+          <div className="mt-11 flex flex-wrap justify-center gap-4">
+            <Link to="/contact" className="btn btn-primary">
               Get in Touch
-              <ArrowRight size={16} />
+              <ArrowRight size={15} />
             </Link>
-            <Link
-              to="/references"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white border border-white/25 hover:border-accent-300 hover:text-accent-300 transition-colors"
-            >
+            <Link to="/references" className="btn btn-ghost-light">
               View Our References
             </Link>
           </div>
