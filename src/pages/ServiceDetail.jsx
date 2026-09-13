@@ -44,7 +44,7 @@ export default function ServiceDetail() {
                 <div className="grid place-items-center h-16 w-16 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md text-accent-300 mb-7">
                   <Icon size={30} />
                 </div>
-                <h1 className="text-4xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[1.1] max-w-3xl">{service.title}</h1>
+                <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold leading-tight max-w-3xl">{service.title}</h1>
                 <p className="mt-6 text-lg leading-9 text-ink-200 max-w-2xl">{service.summary}</p>
               </Reveal>
             </div>

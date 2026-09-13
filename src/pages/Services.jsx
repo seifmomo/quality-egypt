@@ -28,7 +28,7 @@ export default function Services() {
                     <div className="grid place-items-center h-13 w-13 p-3.5 rounded-2xl bg-gradient-to-br from-ink-900 to-ink-800 text-white shadow-card">
                       <Icon size={24} />
                     </div>
-                    <span className="grid place-items-center h-9 w-9 rounded-full bg-ink-50 text-ink-300 group-hover:bg-accent-400 group-hover:text-ink-950 transition-colors">
+                    <span className="grid place-items-center h-9 w-9 rounded-full bg-ink-50 text-ink-500 group-hover:bg-accent-400 group-hover:text-ink-950 transition-colors">
                       <ArrowRight size={15} />
                     </span>
                   </div>

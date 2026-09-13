@@ -31,7 +31,7 @@ export default function ReferenceCategory() {
             <div>
               <Reveal>
                 <span className="eyebrow text-accent-300">Selected References</span>
-                <h1 className="mt-4 text-4xl md:text-5xl font-black tracking-tight leading-[1.1]">{ref.title}</h1>
+                <h1 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">{ref.title}</h1>
                 <p className="mt-6 text-lg leading-9 text-ink-200 max-w-xl">
                   Representative projects where Quality engineered, supplied and integrated the systems.
                 </p>

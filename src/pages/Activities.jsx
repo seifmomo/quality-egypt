@@ -87,7 +87,7 @@ export default function Activities() {
                 <span className="text-5xl font-black text-accent-400">{partners.length}</span>
                 <span className="text-sm font-bold text-ink-200 leading-snug">
                   Technology Groups
-                  <span className="block mt-1 text-ink-400 text-xs font-semibold">
+                  <span className="block mt-1 text-ink-500 text-xs font-semibold">
                     more than {partners.reduce((n, p) => n + p.members.length, 0)} brands
                   </span>
                 </span>

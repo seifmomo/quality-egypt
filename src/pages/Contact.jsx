@@ -105,7 +105,7 @@ export default function Contact() {
                       <MapPin size={18} />
                     </span>
                     <div>
-                      <span className="block text-xs font-bold uppercase tracking-wide text-ink-400 mb-1">Address</span>
+                      <span className="block text-xs font-bold uppercase tracking-wide text-ink-500 mb-1">Address</span>
                       <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="hover:text-accent-300 transition-colors leading-6">
                         {site.address}
                       </a>
@@ -116,7 +116,7 @@ export default function Contact() {
                       <Phone size={18} />
                     </span>
                     <div>
-                      <span className="block text-xs font-bold uppercase tracking-wide text-ink-400 mb-1">Phone</span>
+                      <span className="block text-xs font-bold uppercase tracking-wide text-ink-500 mb-1">Phone</span>
                       <a href={`tel:${site.phoneHref}`} className="hover:text-accent-300 transition-colors" dir="ltr">{site.phone}</a>
                     </div>
                   </li>
@@ -125,7 +125,7 @@ export default function Contact() {
                       <Mail size={18} />
                     </span>
                     <div className="min-w-0">
-                      <span className="block text-xs font-bold uppercase tracking-wide text-ink-400 mb-1">Email</span>
+                      <span className="block text-xs font-bold uppercase tracking-wide text-ink-500 mb-1">Email</span>
                       <a href={`mailto:${site.email}`} className="hover:text-accent-300 transition-colors break-all" dir="ltr">{site.email}</a>
                     </div>
                   </li>

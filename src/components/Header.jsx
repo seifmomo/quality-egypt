@@ -11,7 +11,7 @@ function Wordmark({ dark = false }) {
         <span className={`block font-black text-[1.05rem] tracking-tight ${dark ? 'text-white' : 'text-ink-900'}`}>
           {site.name}
         </span>
-        <span className={`block mt-1 text-[0.62rem] font-semibold tracking-[0.14em] uppercase ${dark ? 'text-ink-300' : 'text-ink-400'}`}>
+        <span className={`block mt-1 text-[0.62rem] font-semibold tracking-[0.14em] uppercase ${dark ? 'text-ink-300' : 'text-ink-500'}`}>
           Engineering Projects Co.
         </span>
       </span>
@@ -22,7 +22,6 @@ function Wordmark({ dark = false }) {
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -67,7 +66,7 @@ export default function Header() {
           <div className="hidden xl:flex items-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white bg-ink-900 hover:bg-ink-800 shadow-card transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white bg-accent-500 hover:bg-accent-600 shadow-card transition-colors"
             >
               Start a Project
               <ArrowRight size={15} />
@@ -108,7 +107,7 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-full text-sm font-bold text-white bg-ink-900"
+                className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-full text-sm font-bold text-white bg-accent-500"
               >
                 Start a Project
                 <ArrowRight size={15} />

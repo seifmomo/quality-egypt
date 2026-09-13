@@ -35,7 +35,7 @@ export default function NewsArticle() {
                 {new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
               </span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-[1.12]">{article.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">{article.title}</h1>
             <p className="mt-6 text-lg md:text-xl text-ink-300 max-w-2xl mx-auto leading-8">{article.excerpt}</p>
           </Reveal>
         </div>

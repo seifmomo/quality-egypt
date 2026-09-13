@@ -10,6 +10,13 @@ export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' })
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setShown(true)
+      return
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -19,10 +26,15 @@ export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' })
           }
         })
       },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+      { threshold: 0.01 },
     )
     io.observe(el)
-    return () => io.disconnect()
+
+    const t = setTimeout(() => setShown(true), 2500)
+    return () => {
+      io.disconnect()
+      clearTimeout(t)
+    }
   }, [])
 
   return (
@@ -76,7 +88,7 @@ export function PageHero({ title, desc, crumb }) {
             <span className="text-white">{crumb}</span>
           </div>
         </Reveal>
-        <h1 className="text-4xl md:text-5xl xl:text-6xl font-black tracking-tight leading-[1.08] max-w-3xl">
+        <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold leading-tight max-w-3xl">
           {title}
         </h1>
         {desc && (

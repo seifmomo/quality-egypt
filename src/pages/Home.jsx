@@ -54,26 +54,27 @@ const serviceIcons = [Layers, Wrench, Server, Shield, BookOpen, Hammer]
 /* ── Hero ────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-ink-950 text-white">
-      {/* Background patterns */}
-      <div className="absolute inset-0 bg-grid-dark opacity-60" aria-hidden="true" />
-      <div className="absolute -top-48 end-[-6%] w-[42rem] h-[42rem] rounded-full bg-accent-500/15 blur-3xl" aria-hidden="true" />
-      <div className="absolute -bottom-40 start-[-8%] w-[34rem] h-[34rem] rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
+    <section className="relative overflow-hidden bg-gradient-to-b from-ink-50 via-white to-white text-ink-900">
+      <div className="absolute inset-0 bg-grid-light opacity-70" aria-hidden="true" />
+      <div className="absolute -top-48 end-[-8%] w-[34rem] h-[34rem] rounded-full bg-accent-500/10 blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-40 start-[-6%] w-[28rem] h-[28rem] rounded-full bg-gold-400/25 blur-3xl" aria-hidden="true" />
+      <span className="absolute top-0 end-0 h-[3px] w-1/2 bg-gradient-to-l from-gold-500 to-transparent" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-20 md:pt-36 md:pb-24">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-24 md:pt-32 md:pb-32">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
           <div>
             <Reveal>
-              <span className="eyebrow justify-start text-accent-300">Since {site.founded}</span>
-              <h1 className="mt-5 text-4xl sm:text-5xl xl:text-[3.4rem] leading-[1.12] font-black tracking-tight">
+              <span className="eyebrow justify-start">Since {site.founded} — Egyptian Engineering Projects Co.</span>
+              <h1 className="mt-5 text-4xl sm:text-5xl xl:text-[3.5rem] leading-tight font-extrabold">
                 Creating Integrated
                 <span className="block text-grad-primary">Innovative Systems</span>
               </h1>
             </Reveal>
 
             <Reveal delay={80}>
-              <p className="mt-7 text-base md:text-lg leading-9 text-ink-300 max-w-xl">
-                Engineering, procurement, installation and maintenance for Egypt’s most demanding landmark projects — powered by a globally partnered, owner-operated team.
+              <p className="mt-6 text-base md:text-lg leading-8 text-ink-600 max-w-xl">
+                Engineering, procurement, installation and maintenance for Egypt’s most demanding landmark projects —
+                powered by a globally partnered, owner-operated team.
               </p>
             </Reveal>
 
@@ -81,14 +82,14 @@ function Hero() {
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
                   to="/references"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-ink-950 bg-accent-400 hover:bg-accent-300 shadow-glow transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white bg-accent-500 hover:bg-accent-600 shadow-glow transition-colors"
                 >
                   View Our References
                   <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/services"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white border border-white/25 hover:border-accent-300 hover:text-accent-300 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-ink-800 border border-ink-200 hover:border-accent-500 hover:text-accent-600 transition-colors"
                 >
                   Explore Services
                 </Link>
@@ -96,14 +97,14 @@ function Hero() {
             </Reveal>
 
             <Reveal delay={220}>
-              <div className="mt-12 flex flex-wrap gap-8">
+              <div className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
                 {homeStats.map((s) => (
                   <div key={s.label} className="flex flex-col">
-                    <span className="text-3xl md:text-4xl font-black text-accent-400">
+                    <span className="text-3xl md:text-4xl font-black text-accent-600">
                       {s.value}
-                      {s.suffix}
+                      <span className="text-gold-500">{s.suffix}</span>
                     </span>
-                    <span className="mt-1.5 text-xs font-semibold text-ink-400 uppercase tracking-wide">{s.label}</span>
+                    <span className="mt-1.5 text-xs font-semibold text-ink-500 uppercase tracking-wide">{s.label}</span>
                   </div>
                 ))}
               </div>
@@ -113,18 +114,23 @@ function Hero() {
           {/* Image panel */}
           <div className="hidden lg:block relative">
             <Reveal delay={120}>
-              <div className="relative rounded-[2rem] overflow-hidden shadow-lift ring-1 ring-white/10 animate-q-float">
+              <div className="group relative rounded-[2rem] overflow-hidden shadow-lift ring-1 ring-ink-100">
                 <img
                   src="/quality-egypt/images/hero-gem.jpg"
                   alt="Grand Egyptian Museum entrance"
-                  className="w-full h-[28rem] object-cover"
+                  className="w-full h-[30rem] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-ink-950/20" aria-hidden="true" />
-                <span className="absolute bottom-6 start-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-[0.78rem] font-bold text-white shadow-card">
-                  <Building size={15} className="text-accent-400" />
-                  {homeStats[1].value}+ landmark projects delivered
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-transparent to-transparent" aria-hidden="true" />
+                <span className="absolute top-6 end-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-400 text-ink-950 text-[0.78rem] font-bold shadow-card">
+                  Est. {site.founded}
                 </span>
+                <div className="absolute bottom-6 start-6 end-6">
+                  <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/15 backdrop-blur-md text-[0.78rem] font-bold text-white ring-1 ring-white/20">
+                    <Building size={15} className="text-gold-300" />
+                    {homeStats[1].value}+ landmark projects delivered
+                  </span>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -155,7 +161,7 @@ function ServicesSection() {
                   to={`/services/${s.slug}`}
                   className="group h-full bg-white rounded-2xl p-6 shadow-card border border-ink-100/60 hover:shadow-lift hover:-translate-y-1 hover:border-accent-400/40 transition-all"
                 >
-                  <div className="grid place-items-center h-12 w-12 rounded-xl bg-gradient-to-br from-ink-900 to-ink-800 text-white shadow-card mb-5">
+                  <div className="grid place-items-center h-12 w-12 rounded-xl bg-gradient-to-br from-accent-500 to-accent-700 text-white shadow-card mb-5">
                     <Icon size={21} />
                   </div>
                   <h3 className="text-lg font-bold text-ink-900 group-hover:text-accent-600 transition-colors">{s.title}</h3>
@@ -308,7 +314,7 @@ function NewsSection() {
                   <span className="inline-block px-3 py-1 rounded-full bg-accent-400/15 text-accent-600 text-[0.68rem] font-bold uppercase tracking-wide">
                     {n.category}
                   </span>
-                  <span className="flex items-center gap-1.5 text-xs text-ink-400">
+                  <span className="flex items-center gap-1.5 text-xs text-ink-500">
                     <CalendarDays size={13} />
                     {new Date(n.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>

@@ -43,7 +43,7 @@ export default function News() {
                   <span className="inline-block px-3 py-1 rounded-full bg-accent-400/15 text-accent-600 text-[0.68rem] font-bold uppercase tracking-wide">
                     {n.category}
                   </span>
-                  <span className="flex items-center gap-1.5 text-xs text-ink-400">
+                  <span className="flex items-center gap-1.5 text-xs text-ink-500">
                     <CalendarDays size={13} />
                     {new Date(n.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>
