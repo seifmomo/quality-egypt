@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { ArrowRight, Menu, X } from 'lucide-react'
-import { nav, site } from '../content'
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
+import { nav, site, services, references } from '../content'
+
+const subMenus = {
+  '/services': services.map((s) => ({ label: s.title, to: `/services/${s.slug}` })),
+  '/references': references.map((r) => ({ label: r.title, to: `/references/${r.slug}` })),
+}
 
 function Wordmark({ dark = false }) {
   return (
@@ -17,6 +22,7 @@ function Wordmark({ dark = false }) {
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [sub, setSub] = useState(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -24,6 +30,8 @@ export default function Header() {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const toggleSub = (to) => setSub((prev) => (prev === to ? null : to))
 
   return (
     <header
@@ -42,20 +50,65 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden xl:flex items-center gap-0.5" aria-label="Primary">
-            {nav.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) =>
-                  `px-3 py-2 rounded-lg text-[0.85rem] font-semibold transition-colors ${
-                    isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-100/60'
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {nav.map((item) => {
+              const children = subMenus[item.to]
+              if (!children) {
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.to === '/'}
+                    className={({ isActive }) =>
+                      `px-3 py-2 rounded-lg text-[0.85rem] font-semibold transition-colors ${
+                        isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-100/60'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )
+              }
+              return (
+                <div key={item.to} className="relative group">
+                  <NavLink
+                    to={item.to}
+                    end={false}
+                    className={({ isActive }) =>
+                      `inline-flex items-center gap-1 px-3 py-2 rounded-lg text-[0.85rem] font-semibold transition-colors ${
+                        isActive ? 'text-accent-600' : 'text-ink-600 hover:text-ink-900 hover:bg-ink-100/60'
+                      }`
+                    }
+                  >
+                    {item.label}
+                    <ChevronDown size={14} className="text-ink-400 group-hover:text-accent-500 transition-colors" />
+                  </NavLink>
+
+                  <div
+                    className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 translate-y-1 transition-all duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0"
+                  >
+                    <div className="w-80 rounded-2xl bg-white shadow-lift ring-1 ring-ink-100 p-2 max-h-[70vh] overflow-y-auto">
+                      <Link
+                        to={item.to}
+                        className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[0.78rem] font-bold uppercase tracking-wide text-ink-900 hover:text-accent-700 hover:bg-accent-400/10 transition-colors"
+                      >
+                        View all
+                        <ArrowRight size={13} />
+                      </Link>
+                      <div className="h-px bg-ink-100 mx-3 my-1.5" aria-hidden="true" />
+                      {children.map((c) => (
+                        <Link
+                          key={c.to}
+                          to={c.to}
+                          className="block px-4 py-2.5 rounded-xl text-[0.85rem] font-semibold text-ink-600 hover:text-accent-700 hover:bg-accent-400/10 transition-colors"
+                        >
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </nav>
 
           <div className="hidden xl:flex items-center">
@@ -83,21 +136,66 @@ export default function Header() {
       {open && (
         <div className="xl:hidden border-t border-ink-100 bg-white shadow-card">
           <div className="px-4 py-4 space-y-1">
-            {nav.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === '/'}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  `block px-4 py-3 rounded-xl text-[0.95rem] font-semibold ${
-                    isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-700 hover:bg-ink-50'
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {nav.map((item) => {
+              const children = subMenus[item.to]
+              if (!children) {
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.to === '/'}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `block px-4 py-3 rounded-xl text-[0.95rem] font-semibold ${
+                        isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-700 hover:bg-ink-50'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )
+              }
+              return (
+                <div key={item.to} className="rounded-xl overflow-hidden">
+                  <div className="flex items-center">
+                    <NavLink
+                      to={item.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `flex-1 px-4 py-3 rounded-xl text-[0.95rem] font-semibold ${
+                          isActive ? 'text-accent-600 bg-accent-400/10' : 'text-ink-700'
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                    <button
+                      type="button"
+                      onClick={() => toggleSub(item.to)}
+                      aria-expanded={sub === item.to}
+                      aria-label={`Toggle ${item.label} submenu`}
+                      className="me-2 grid place-items-center h-10 w-10 rounded-xl text-ink-500 hover:bg-ink-50"
+                    >
+                      <ChevronDown size={18} className={`transition-transform duration-200 ${sub === item.to ? 'rotate-180' : ''}`} />
+                    </button>
+                  </div>
+                  {sub === item.to && (
+                    <div className="mt-1 ps-4 pe-3 pb-2 space-y-0.5 border-s-2 border-accent-400/30 ms-4">
+                      {children.map((c) => (
+                        <Link
+                          key={c.to}
+                          to={c.to}
+                          onClick={() => setOpen(false)}
+                          className="block px-4 py-2.5 rounded-xl text-[0.85rem] font-semibold text-ink-600 hover:text-accent-700 hover:bg-accent-400/10"
+                        >
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
             <div className="pt-2">
               <Link
                 to="/contact"
