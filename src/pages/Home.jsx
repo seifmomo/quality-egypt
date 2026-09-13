@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   Layers,
   Wrench,
   BookOpen,
@@ -50,82 +53,163 @@ const activityIcons = {
 
 const serviceIcons = [Layers, Wrench, Server, Shield, BookOpen, Hammer]
 
-/* ── Hero ────────────────────────────────────────────────────── */
+/* ── Hero slider ─────────────────────────────────────────────── */
+const heroSlides = [
+  { image: '/quality-egypt/images/hero-gem.jpg', name: 'Grand Egyptian Museum', category: 'Museums' },
+  { image: '/quality-egypt/images/p-ramsis.jpg', name: 'GEM — Galleries & Interpretation', category: 'Museums' },
+  { image: '/quality-egypt/images/p-nmec.jpg', name: 'National Museum of Egyptian Civilization', category: 'Museums' },
+  { image: '/quality-egypt/images/p-manara.jpg', name: 'Al Manara Conference Center', category: 'Conference Centers' },
+  { image: '/quality-egypt/images/p-league.jpg', name: 'The Arab League', category: 'Conference Technology' },
+  { image: '/quality-egypt/images/p-stadium.jpg', name: 'Cairo Stadium', category: 'Stadiums & Sports Facilities' },
+]
+
 function Hero() {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const count = heroSlides.length
+
+  useEffect(() => {
+    if (paused) return
+    const t = setInterval(() => setActive((a) => (a + 1) % count), 6000)
+    return () => clearInterval(t)
+  }, [paused, active, count])
+
+  const go = (dir) => setActive((a) => (a + dir + count) % count)
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-ink-50 via-white to-white text-ink-900">
-      <div className="absolute -top-48 end-[-8%] w-[30rem] h-[30rem] rounded-full bg-accent-500/10 blur-3xl" aria-hidden="true" />
-      <span className="absolute top-0 end-0 h-[3px] w-1/2 bg-gradient-to-l from-gold-500 to-transparent" aria-hidden="true" />
+    <section
+      className="relative overflow-hidden bg-ink-950 text-white"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <span className="absolute top-0 inset-x-0 z-20 h-[3px] bg-gradient-to-r from-accent-400 via-accent-600 to-gold-400" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-24 md:pt-32 md:pb-28">
-        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
-          <div>
-            <Reveal>
-              <span className="eyebrow justify-start">Since {site.founded} — Egyptian Engineering Projects Co.</span>
-              <h1 className="mt-5 text-4xl sm:text-5xl xl:text-[3.4rem] leading-tight font-extrabold">
-                Creating Integrated
-                <span className="block text-grad-primary">Innovative Systems</span>
-              </h1>
-            </Reveal>
+      {/* Slides */}
+      <div className="absolute inset-0">
+        {heroSlides.map((s, i) => (
+          <div
+            key={s.image}
+            aria-hidden={i !== active}
+            className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${i === active ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <img
+              src={s.image}
+              alt={s.name}
+              className={`h-full w-full object-cover transition-transform duration-[8000ms] ease-out ${
+                i === active ? 'scale-105' : 'scale-100'
+              }`}
+            />
+          </div>
+        ))}
+      </div>
 
-            <Reveal delay={80}>
-              <p className="mt-6 text-base md:text-lg leading-8 text-ink-600 max-w-xl">
-                Engineering, procurement, installation and maintenance for Egypt’s most demanding landmark projects —
-                powered by a globally partnered, owner-operated team.
-              </p>
-            </Reveal>
+      {/* Overlays */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-ink-950/95 via-ink-950/75 sm:via-ink-950/55 to-ink-950/20"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-transparent to-ink-950/40" aria-hidden="true" />
 
-            <Reveal delay={140}>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Link
-                  to="/references"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white bg-accent-500 hover:bg-accent-600 shadow-glow transition-colors"
-                >
-                  View Our References
-                  <ArrowRight size={16} />
-                </Link>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-ink-800 border border-ink-200 hover:border-accent-500 hover:text-accent-600 transition-colors"
-                >
-                  Explore Services
-                </Link>
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-[40rem] md:min-h-[min(88vh,46rem)] flex flex-col justify-center py-24 md:py-28">
+        <Reveal>
+          <span className="eyebrow on-dark justify-start">Since {site.founded} — Egyptian Engineering Projects Co.</span>
+          <h1 className="mt-5 text-4xl sm:text-5xl xl:text-[3.6rem] leading-tight font-extrabold max-w-2xl">
+            Creating Integrated
+            <span className="block text-grad-hero">Innovative Systems</span>
+          </h1>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <p className="mt-6 text-base md:text-lg leading-8 text-ink-200 max-w-xl">
+            Engineering, procurement, installation and maintenance for Egypt’s most demanding landmark projects —
+            powered by a globally partnered, owner-operated team.
+          </p>
+        </Reveal>
+
+        <Reveal delay={140}>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link
+              to="/references"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white bg-accent-500 hover:bg-accent-600 shadow-glow transition-colors"
+            >
+              View Our References
+              <ArrowRight size={16} />
+            </Link>
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-bold text-white border border-white/25 hover:border-accent-300 hover:text-accent-300 transition-colors"
+            >
+              Explore Services
+            </Link>
+          </div>
+        </Reveal>
+
+        <Reveal delay={220}>
+          <div className="mt-12 max-w-xl rounded-2xl bg-white/10 backdrop-blur-sm ring-1 ring-white/15 p-6 grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-7">
+            {homeStats.map((s) => (
+              <div key={s.label} className="flex flex-col">
+                <span className="text-3xl font-black text-accent-300">
+                  {s.value}
+                  <span className="text-gold-400">{s.suffix}</span>
+                </span>
+                <span className="mt-1.5 text-[0.68rem] font-semibold text-ink-200 uppercase tracking-wider">
+                  {s.label}
+                </span>
               </div>
-            </Reveal>
+            ))}
+          </div>
+        </Reveal>
 
-            <Reveal delay={220}>
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
-                {homeStats.map((s) => (
-                  <div key={s.label} className="flex flex-col">
-                    <span className="text-2xl sm:text-3xl xl:text-4xl font-black text-accent-600">
-                      {s.value}
-                      <span className="text-gold-500">{s.suffix}</span>
-                    </span>
-                    <span className="mt-1.5 text-[0.7rem] font-semibold text-ink-500 uppercase tracking-wider max-w-[7.5rem]">
-                      {s.label}
-                    </span>
-                  </div>
+        {/* Slider controls + caption */}
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
+          <Reveal delay={280}>
+            <p className="text-xs font-semibold text-ink-200">
+              <span className="text-accent-300 font-bold">
+                {String(active + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+              </span>
+              <span className="mx-2 text-white/30">|</span>
+              {heroSlides[active].name}
+            </p>
+          </Reveal>
+
+          <Reveal delay={320}>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5" role="tablist" aria-label="Hero slides">
+                {heroSlides.map((s, i) => (
+                  <button
+                    key={s.image}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === active}
+                    aria-label={`Show slide ${i + 1}: ${s.name}`}
+                    onClick={() => setActive(i)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === active ? 'w-6 bg-accent-400' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                    }`}
+                  />
                 ))}
               </div>
-            </Reveal>
-          </div>
-
-          {/* Image panel */}
-          <div className="hidden lg:block">
-            <Reveal delay={120}>
-              <div className="relative">
-                <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] bg-accent-500/10" aria-hidden="true" />
-                <div className="relative rounded-[2rem] overflow-hidden shadow-lift ring-1 ring-ink-100 bg-ink-100">
-                  <img
-                    src="/quality-egypt/images/hero-gem.jpg"
-                    alt="Grand Egyptian Museum entrance"
-                    className="w-full h-[30rem] object-cover"
-                    loading="lazy"
-                  />
-                </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => go(-1)}
+                  aria-label="Previous slide"
+                  className="grid place-items-center h-10 w-10 rounded-full ring-1 ring-white/25 text-white hover:bg-white/15 transition-colors"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => go(1)}
+                  aria-label="Next slide"
+                  className="grid place-items-center h-10 w-10 rounded-full ring-1 ring-white/25 text-white hover:bg-white/15 transition-colors"
+                >
+                  <ChevronRight size={18} />
+                </button>
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

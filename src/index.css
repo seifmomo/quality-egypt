@@ -83,6 +83,9 @@ h6 {
   color: var(--color-accent-600);
   white-space: nowrap;
 }
+.eyebrow.on-dark {
+  color: var(--color-accent-300);
+}
 .eyebrow::before {
   content: "";
   width: 2rem;
@@ -109,6 +112,14 @@ h6 {
 /* Gradient text (reads on light backgrounds) */
 .text-grad-primary {
   background: linear-gradient(100deg, #18a254 0%, #179047 55%, #0f6b35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient text for dark hero surfaces */
+.text-grad-hero {
+  background: linear-gradient(100deg, #8ff0b1 0%, #4ddb87 45%, #c8f7d8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
