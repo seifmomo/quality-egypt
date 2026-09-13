@@ -1,16 +1,41 @@
-# React + Vite
+# Quality Egypt — Corporate Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, complete rebuild of the corporate website for **Egyptian Engineering Projects Co., Quality** (qualityegypt.com) — a leading ELV systems integrator since 1985.
 
-Currently, two official plugins are available:
+Built from scratch with **React 19 + Vite 8 + Tailwind CSS 4**, deployed on **GitHub Pages**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- **Brand design system** — deep navy + electric cyan + gold accent, Inter typography, grid textures, glassmorphism and scroll-reveal motion
+- **Full site coverage** — Home, About (story / vision & mission / timeline / values), Services (6 + detail pages), Scope of Activities (16), Partners (120+ brands), Selected References (10 categories, each with projects), News (with article pages), Jobs and Contact (form + map)
+- **Cinematic hero** with flagship project imagery and animated stats
+- **Partner marquee**, landmark project showcase, news grid — all data-driven
+- **Fully responsive** LTR layout with sticky glass header and mobile menu
+- Deep-link friendly SPA routing (`/services/:slug`, `/references/:slug`, `/news/:slug`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧠 Content
 
-## Expanding the Oxlint configuration
+All content lives in `src/content.js` — company data, services, activities, partners, references, projects, news and jobs. Edit one file to update the whole site. Images are in `public/images/` (company-approved assets).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 🚀 Running locally
+
+Requires **Node.js 18+** and **npm**.
+
+```bash
+npm install
+npm run dev        # start dev server
+npm run lint       # oxlint
+npm run build      # production build to dist/
+```
+
+## 🚢 Deploying to GitHub Pages
+
+The site is configured for the `/quality-egypt/` sub-path (see `vite.config.js`).
+
+```bash
+npm run deploy
+```
+
+This builds the app, adds `.nojekyll`, duplicates `index.html` as `404.html` (for SPA deep links), and publishes `dist/` to the `gh-pages` branch.
+
+Live: **https://seifmomo.github.io/quality-egypt/**
