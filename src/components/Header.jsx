@@ -5,17 +5,12 @@ import { nav, site } from '../content'
 
 function Wordmark({ dark = false }) {
   return (
-    <span className="flex items-center gap-3">
-      <img src="/quality-egypt/images/logo-dark.png" alt="" className="h-10 w-auto" loading="lazy" />
-      <span className="leading-none">
-        <span className={`block font-black text-[1.05rem] tracking-tight ${dark ? 'text-white' : 'text-ink-900'}`}>
-          {site.name}
-        </span>
-        <span className={`block mt-1 text-[0.62rem] font-semibold tracking-[0.14em] uppercase ${dark ? 'text-ink-300' : 'text-ink-500'}`}>
-          Engineering Projects Co.
-        </span>
-      </span>
-    </span>
+    <img
+      src={dark ? '/quality-egypt/images/logo-light.png' : '/quality-egypt/images/logo-dark.png'}
+      alt={site.name}
+      className="h-9 w-auto"
+      loading="lazy"
+    />
   )
 }
 

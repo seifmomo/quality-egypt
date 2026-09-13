@@ -30,7 +30,7 @@ export default function Jobs() {
                 <div className="rounded-2xl border border-ink-100 bg-white p-7 shadow-card hover:shadow-lift transition-all">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="flex items-start gap-4">
-                      <span className="grid place-items-center h-12 w-12 rounded-xl bg-ink-900 text-white shrink-0">
+                      <span className="grid place-items-center h-12 w-12 rounded-full bg-accent-400/15 text-accent-600 shrink-0">
                         <Briefcase size={21} />
                       </span>
                       <div>

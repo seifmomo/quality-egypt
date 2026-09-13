@@ -37,15 +37,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           {/* Brand */}
           <div>
-            <span className="flex items-center gap-3">
-              <img src="/quality-egypt/images/logo-light.png" alt="" className="h-10 w-auto" loading="lazy" />
-              <span className="leading-none">
-                <span className="block font-black text-lg text-white tracking-tight">{site.name}</span>
-                <span className="block mt-1 text-[0.62rem] font-semibold tracking-[0.14em] uppercase text-ink-400">
-                  Engineering Projects Co.
-                </span>
-              </span>
-            </span>
+            <img src="/quality-egypt/images/logo-light.png" alt={site.name} className="h-10 w-auto" loading="lazy" />
             <p className="mt-5 text-sm leading-7 text-ink-300 max-w-sm">
               A leading ELV systems integrator and commercial contractor since {site.founded} — engineering,
               procuring, installing and maintaining the systems behind Egypt’s most iconic landmarks.

@@ -146,7 +146,7 @@ export default function Contact() {
                         target="_blank"
                         rel="noreferrer"
                         aria-label={s.label}
-                        className="grid place-items-center h-12 w-12 rounded-xl bg-ink-900 text-white hover:bg-accent-500 transition-colors"
+                        className="grid place-items-center h-12 w-12 rounded-full bg-accent-400/15 text-accent-600 hover:bg-accent-500 hover:text-white transition-colors"
                       >
                         <Icon size={19} />
                       </a>

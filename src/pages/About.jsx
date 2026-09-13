@@ -82,7 +82,7 @@ export default function About() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="bg-ink-50 bg-grid-light">
+      <section className="bg-ink-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-24">
           <SectionHeadingRow />
           <div className="mt-12 grid md:grid-cols-2 gap-6">

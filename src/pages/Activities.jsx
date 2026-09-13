@@ -48,7 +48,7 @@ export default function Activities() {
         desc="From sound and security to planetarium projection and VR, we design, supply and integrate every discipline a modern building demands."
       />
 
-      <section className="bg-ink-50 bg-grid-light">
+      <section className="bg-ink-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-24">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {activities.map((a, i) => {
@@ -56,7 +56,7 @@ export default function Activities() {
               return (
                 <Reveal key={a.slug} delay={(i % 4) * 60}>
                   <div className="group h-full rounded-2xl bg-white border border-ink-100/70 p-6 shadow-card hover:shadow-lift hover:-translate-y-1 hover:border-accent-400/40 transition-all">
-                    <div className="grid place-items-center h-12 w-12 rounded-xl bg-ink-900 text-white group-hover:bg-accent-500 transition-colors shadow-sm">
+                    <div className="grid place-items-center h-12 w-12 rounded-full bg-accent-400/15 text-accent-600 group-hover:bg-accent-500 group-hover:text-white transition-colors">
                       <Icon size={21} />
                     </div>
                     <h3 className="mt-5 text-lg font-bold text-ink-900">{a.title}</h3>

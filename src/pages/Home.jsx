@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import {
   ArrowRight,
   Layers,
-  Building,
   Wrench,
   BookOpen,
   Shield,
@@ -55,17 +54,15 @@ const serviceIcons = [Layers, Wrench, Server, Shield, BookOpen, Hammer]
 function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-ink-50 via-white to-white text-ink-900">
-      <div className="absolute inset-0 bg-grid-light opacity-70" aria-hidden="true" />
-      <div className="absolute -top-48 end-[-8%] w-[34rem] h-[34rem] rounded-full bg-accent-500/10 blur-3xl" aria-hidden="true" />
-      <div className="absolute -bottom-40 start-[-6%] w-[28rem] h-[28rem] rounded-full bg-gold-400/25 blur-3xl" aria-hidden="true" />
+      <div className="absolute -top-48 end-[-8%] w-[30rem] h-[30rem] rounded-full bg-accent-500/10 blur-3xl" aria-hidden="true" />
       <span className="absolute top-0 end-0 h-[3px] w-1/2 bg-gradient-to-l from-gold-500 to-transparent" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-24 md:pt-32 md:pb-32">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-24 md:pt-32 md:pb-28">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
             <Reveal>
               <span className="eyebrow justify-start">Since {site.founded} — Egyptian Engineering Projects Co.</span>
-              <h1 className="mt-5 text-4xl sm:text-5xl xl:text-[3.5rem] leading-tight font-extrabold">
+              <h1 className="mt-5 text-4xl sm:text-5xl xl:text-[3.4rem] leading-tight font-extrabold">
                 Creating Integrated
                 <span className="block text-grad-primary">Innovative Systems</span>
               </h1>
@@ -97,14 +94,16 @@ function Hero() {
             </Reveal>
 
             <Reveal delay={220}>
-              <div className="mt-12 flex flex-wrap gap-x-10 gap-y-6">
+              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
                 {homeStats.map((s) => (
                   <div key={s.label} className="flex flex-col">
-                    <span className="text-3xl md:text-4xl font-black text-accent-600">
+                    <span className="text-2xl sm:text-3xl xl:text-4xl font-black text-accent-600">
                       {s.value}
                       <span className="text-gold-500">{s.suffix}</span>
                     </span>
-                    <span className="mt-1.5 text-xs font-semibold text-ink-500 uppercase tracking-wide">{s.label}</span>
+                    <span className="mt-1.5 text-[0.7rem] font-semibold text-ink-500 uppercase tracking-wider max-w-[7.5rem]">
+                      {s.label}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -112,24 +111,17 @@ function Hero() {
           </div>
 
           {/* Image panel */}
-          <div className="hidden lg:block relative">
+          <div className="hidden lg:block">
             <Reveal delay={120}>
-              <div className="group relative rounded-[2rem] overflow-hidden shadow-lift ring-1 ring-ink-100">
-                <img
-                  src="/quality-egypt/images/hero-gem.jpg"
-                  alt="Grand Egyptian Museum entrance"
-                  className="w-full h-[30rem] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-transparent to-transparent" aria-hidden="true" />
-                <span className="absolute top-6 end-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-400 text-ink-950 text-[0.78rem] font-bold shadow-card">
-                  Est. {site.founded}
-                </span>
-                <div className="absolute bottom-6 start-6 end-6">
-                  <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/15 backdrop-blur-md text-[0.78rem] font-bold text-white ring-1 ring-white/20">
-                    <Building size={15} className="text-gold-300" />
-                    {homeStats[1].value}+ landmark projects delivered
-                  </span>
+              <div className="relative">
+                <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] bg-accent-500/10" aria-hidden="true" />
+                <div className="relative rounded-[2rem] overflow-hidden shadow-lift ring-1 ring-ink-100 bg-ink-100">
+                  <img
+                    src="/quality-egypt/images/hero-gem.jpg"
+                    alt="Grand Egyptian Museum entrance"
+                    className="w-full h-[30rem] object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </Reveal>
@@ -143,7 +135,7 @@ function Hero() {
 /* ── Services grid ───────────────────────────────────────────── */
 function ServicesSection() {
   return (
-    <section className="bg-ink-50 bg-grid-light">
+    <section className="bg-ink-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-24">
         <SectionHeading
           eyebrow="What We Do"
@@ -152,21 +144,23 @@ function ServicesSection() {
           align="center"
         />
 
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {services.map((s, i) => {
             const Icon = serviceIcons[i] || Layers
             return (
-              <Reveal key={s.slug} delay={i * 50}>
+              <Reveal key={s.slug} delay={i * 50} className="h-full">
                 <Link
                   to={`/services/${s.slug}`}
-                  className="group h-full bg-white rounded-2xl p-6 shadow-card border border-ink-100/60 hover:shadow-lift hover:-translate-y-1 hover:border-accent-400/40 transition-all"
+                  className="group flex h-full flex-col bg-white rounded-2xl p-6 border border-ink-100 shadow-card hover:shadow-lift transition-shadow"
                 >
-                  <div className="grid place-items-center h-12 w-12 rounded-xl bg-gradient-to-br from-accent-500 to-accent-700 text-white shadow-card mb-5">
-                    <Icon size={21} />
+                  <div className="grid place-items-center h-12 w-12 rounded-full bg-accent-400/15 text-accent-600 group-hover:bg-accent-500 group-hover:text-white transition-colors">
+                    <Icon size={22} />
                   </div>
-                  <h3 className="text-lg font-bold text-ink-900 group-hover:text-accent-600 transition-colors">{s.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-ink-500 line-clamp-3">{s.summary}</p>
-                  <span className="inline-flex items-center gap-1 mt-5 text-xs font-bold text-accent-600 group-hover:translate-x-[-3px] transition-transform">
+                  <h3 className="mt-5 text-lg font-bold text-ink-900 group-hover:text-accent-600 transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-ink-500">{s.summary}</p>
+                  <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-xs font-bold text-accent-700 underline underline-offset-4 decoration-accent-300 group-hover:decoration-accent-700">
                     Learn more
                     <ArrowRight size={14} />
                   </span>
@@ -238,7 +232,7 @@ function ActivitiesStrip() {
                   to="/activities"
                   className="group flex flex-col items-center gap-3 p-5 rounded-2xl bg-white border border-ink-100/60 shadow-card hover:shadow-lift hover:-translate-y-1 hover:border-accent-400/30 transition-all text-center"
                 >
-                  <div className="grid place-items-center h-11 w-11 rounded-xl bg-ink-900 text-white group-hover:bg-accent-500 transition-colors shadow-sm">
+                  <div className="grid place-items-center h-11 w-11 rounded-full bg-accent-400/15 text-accent-600 group-hover:bg-accent-500 group-hover:text-white transition-colors">
                     <Icon size={20} />
                   </div>
                   <span className="text-[0.78rem] font-bold text-ink-700 group-hover:text-accent-600 transition-colors leading-tight">{a.title}</span>
@@ -308,7 +302,7 @@ function NewsSection() {
             <Reveal key={n.slug} delay={i * 60}>
               <Link
                 to={`/news/${n.slug}`}
-                className="group block h-full bg-ink-50 rounded-2xl p-6 shadow-card border border-ink-100/50 hover:shadow-lift hover:-translate-y-1 hover:border-accent-400/30 transition-all"
+                className="group flex h-full flex-col bg-ink-50 rounded-2xl p-6 border border-ink-100/50 shadow-card hover:shadow-lift transition-shadow"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <span className="inline-block px-3 py-1 rounded-full bg-accent-400/15 text-accent-600 text-[0.68rem] font-bold uppercase tracking-wide">
@@ -320,8 +314,8 @@ function NewsSection() {
                   </span>
                 </div>
                 <h3 className="text-lg font-bold text-ink-900 group-hover:text-accent-600 transition-colors leading-snug">{n.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-2">{n.excerpt}</p>
-                <span className="inline-flex items-center gap-1 mt-5 text-xs font-bold text-accent-600 group-hover:translate-x-[-3px] transition-transform">
+                <p className="mt-3 text-sm leading-6 text-ink-500">{n.excerpt}</p>
+                <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-xs font-bold text-accent-700 underline underline-offset-4 decoration-accent-300 group-hover:decoration-accent-700">
                   Read article
                   <ArrowRight size={14} />
                 </span>
