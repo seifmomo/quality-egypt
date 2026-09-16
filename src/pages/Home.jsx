@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom'
 import {
   ArrowRight,
   ArrowUpRight,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Compass,
   Layers,
   Wrench,
+  PenTool,
+  Package,
   BookOpen,
   Shield,
   Hammer,
@@ -443,10 +447,10 @@ function PartnersWall() {
     <section className="border-t border-ink-100 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div className="flex items-end justify-between gap-8 flex-wrap">
-          <SectionHeading
-            index="04"
-            eyebrow="Our Partners"
-            title="The world’s most trusted brands, engineered locally."
+<SectionHeading
+          index="05"
+          eyebrow="Our Partners"
+          title="The world’s most trusted brands, engineered locally."
             desc="We represent more than 120 leading global manufacturers across every discipline — bringing proven technology to Egypt’s most demanding projects."
           />
           <Reveal delay={120}>
@@ -485,7 +489,7 @@ function NewsSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div className="flex items-end justify-between gap-8 flex-wrap">
           <SectionHeading
-            index="05"
+            index="06"
             eyebrow="The Journal"
             title="News & milestones from the field."
             align="start"
@@ -529,6 +533,112 @@ function NewsSection() {
   )
 }
 
+/* ── How we deliver ─────────────────────────────────────────── */
+const processSteps = [
+  { icon: Compass, title: 'Discover', text: 'We start with your brief — assessing needs, site conditions and operational requirements to scope the right systems.' },
+  { icon: PenTool, title: 'Design', text: 'Concept design, detailed engineering and shop drawings translated into buildable, budgeted systems.' },
+  { icon: Package, title: 'Deliver', text: 'Certified procurement, installation, testing and commissioning against international standards.' },
+  { icon: Headphones, title: 'Support', text: 'Operator training, preventive maintenance and life-cycle care that protect performance for decades.' },
+]
+
+function ProcessSection() {
+  return (
+    <section className="relative bg-white overflow-hidden">
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-ink-100 to-transparent" aria-hidden="true" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <SectionHeading
+          index="04"
+          eyebrow="How We Deliver"
+          title="One accountable team, from brief to lifetime support."
+          desc="A disciplined four-phase approach that protects time, cost and quality on every project — no hand-offs, no guesswork."
+          align="center"
+        />
+        <div className="relative mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <span className="hidden lg:block absolute top-5 start-[12%] end-[88%] h-px bg-gradient-to-r from-transparent to-gold-500/40" aria-hidden="true" />
+          <span className="hidden lg:block absolute top-5 start-[37%] end-[62%] h-px bg-gradient-to-r from-gold-500/40 to-gold-500/40" aria-hidden="true" />
+          <span className="hidden lg:block absolute top-5 start-[62%] end-[37%] h-px bg-gradient-to-r from-gold-500/40 to-gold-500/40" aria-hidden="true" />
+          <span className="hidden lg:block absolute top-5 start-[88%] end-[12%] h-px bg-gradient-to-l from-transparent to-gold-500/40" aria-hidden="true" />
+          {processSteps.map((s, i) => (
+            <Reveal key={s.title} delay={i * 70}>
+              <div className="group relative h-full rounded-2xl bg-ink-50 border border-ink-100 p-7 hover:border-gold-500/40 hover:shadow-lift transition-all">
+                <div className="flex items-center justify-between">
+                  <div className="grid place-items-center h-12 w-12 rounded-full bg-ink-900 text-accent-300 group-hover:bg-accent-600 group-hover:text-white transition-colors">
+                    <s.icon size={22} />
+                  </div>
+                  <span className="font-display italic text-3xl text-ink-100 group-hover:text-gold-500/30 transition-colors">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl text-ink-900">{s.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-ink-500">{s.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── FAQ ────────────────────────────────────────────────────── */
+const faqs = [
+  {
+    q: 'What exactly does Quality Egypt do?',
+    a: 'Quality is a leading ELV systems integrator and commercial contractor. We engineer, procure, install and maintain the electronic and integrated systems behind buildings — audio-visual, conference technology, security, fire alarm, parking, networking, stage, museum and sports systems.',
+  },
+  {
+    q: 'Which landmark projects have you worked on?',
+    a: 'Our references include the Grand Egyptian Museum, the National Museum of Egyptian Civilization, Bibliotheca Alexandrina, the Arab League, Al Manara Conference Center, Cairo Stadium, Ramsis Railway Station and Sphinx International Airport — among more than 300 projects nationwide.',
+  },
+  {
+    q: 'Do you provide maintenance after commissioning?',
+    a: 'Yes. Beyond installation, we offer preventive and corrective maintenance programs, remote monitoring, a rapid-response helpdesk and life-cycle upgrades to keep your systems performing long after handover.',
+  },
+  {
+    q: 'Are you partnered with the manufacturers you represent?',
+    a: 'We maintain long-standing relationships with more than 120 leading global manufacturers across 16 technology groups — Bosch, Christie, Crestron, Hikvision, LenelS2 and many more — so every system is sourced, verified and warranted through the original brands.',
+  },
+  {
+    q: 'Where are you located, and do you work outside Egypt?',
+    a: 'Our head office is in Cairo, Egypt. Through our regional company Quality Saudi and our international partner network, we now deliver systems across the region as well as at home.',
+  },
+  {
+    q: 'How do we start a project with you?',
+    a: 'Get in touch through the contact page or email us directly at quality@qualityegypt.com. We begin with a free consultation to understand your brief, then guide you through discovery, design, delivery and support.',
+  },
+]
+
+function FaqSection() {
+  return (
+    <section className="bg-ink-50">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <SectionHeading
+          index="07"
+          eyebrow="Good to Know"
+          title="Frequently asked questions."
+          desc="Straight answers about how we work, what we deliver and how to get started."
+          align="center"
+        />
+        <div className="mt-14 space-y-4">
+          {faqs.map((f, i) => (
+            <Reveal key={f.q} delay={i * 40}>
+              <details className="group rounded-2xl bg-white border border-ink-100 shadow-card open:shadow-lift">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-7 py-6 text-left outline-none">
+                  <span className="font-display text-lg md:text-xl text-ink-900">{f.q}</span>
+                  <ChevronDown size={20} className="shrink-0 text-gold-600 transition-transform duration-300 group-open:rotate-180" />
+                </summary>
+                <div className="px-7 pb-6 -mt-1 text-sm md:text-base leading-8 text-ink-500 max-w-3xl">
+                  {f.a}
+                </div>
+              </details>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ── Home Page ───────────────────────────────────────────────── */
 export default function Home() {
   return (
@@ -538,8 +648,10 @@ export default function Home() {
       <ServicesSection />
       <ProjectsSection />
       <ActivitiesStrip />
+      <ProcessSection />
       <PartnersWall />
       <NewsSection />
+      <FaqSection />
       <CtaBand />
     </>
   )

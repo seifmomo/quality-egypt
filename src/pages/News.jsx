@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarDays } from 'lucide-react'
 import { news } from '../content'
@@ -6,6 +7,9 @@ import { Reveal, PageHero, CtaBand } from '../components/ui'
 const categories = ['All', ...new Set(news.map((n) => n.category))]
 
 export default function News() {
+  const [active, setActive] = useState('All')
+  const filtered = active === 'All' ? news : news.filter((n) => n.category === active)
+
   return (
     <>
       <PageHero
@@ -16,24 +20,28 @@ export default function News() {
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-24">
         <Reveal>
-          <div className="flex flex-wrap gap-2.5 mb-10">
+          <div className="flex flex-wrap gap-2.5 mb-10" role="tablist" aria-label="Filter news by category">
             {categories.map((c) => (
-              <span
+              <button
                 key={c}
-                className={`px-4 py-2 rounded-full text-xs font-bold ${
-                  c === 'All'
-                    ? 'bg-ink-900 text-white'
-                    : 'bg-ink-50 border border-ink-100 text-ink-600'
+                type="button"
+                role="tab"
+                aria-selected={active === c}
+                onClick={() => setActive(c)}
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-colors ${
+                  active === c
+                    ? 'bg-ink-900 text-white shadow-card'
+                    : 'bg-ink-50 border border-ink-100 text-ink-600 hover:border-accent-400 hover:text-accent-600'
                 }`}
               >
                 {c}
-              </span>
+              </button>
             ))}
           </div>
         </Reveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {news.map((n, i) => (
+          {filtered.map((n, i) => (
             <Reveal key={n.slug} delay={(i % 3) * 50}>
               <Link
                 to={`/news/${n.slug}`}

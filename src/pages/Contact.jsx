@@ -8,14 +8,34 @@ const socialIcons = { Facebook: FacebookIcon, Instagram: InstagramIcon, LinkedIn
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
+  const [error, setError] = useState('')
+  const [form, setForm] = useState({ name: '', email: '', phone: '', project: 'Engineering & Design', message: '' })
 
   const submit = (e) => {
     e.preventDefault()
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
+    if (!emailOk) {
+      setError('Please enter a valid email address so we can reply to you.')
+      return
+    }
+    setError('')
     setSent(true)
+    const subject = `Website inquiry from ${form.name || form.email}`
+    const lines = [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.phone ? `Phone: ${form.phone}` : '',
+      `Interested in: ${form.project}`,
+      '',
+      form.message,
+    ].filter(Boolean)
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`
   }
 
-  const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+  const update = (k) => (e) => {
+    if (error) setError('')
+    setForm((f) => ({ ...f, [k]: e.target.value }))
+  }
 
   const inputCls =
     'w-full rounded-xl border border-ink-200 bg-white px-4 py-3.5 text-sm font-medium text-ink-900 outline-none placeholder:text-ink-300 focus:border-accent-500 focus:ring-2 focus:ring-accent-400/30 transition-all'
@@ -38,10 +58,10 @@ export default function Contact() {
                   <span className="grid place-items-center h-16 w-16 rounded-full bg-accent-400/15 text-accent-600 mx-auto mb-6">
                     <CheckCircle2 size={30} />
                   </span>
-                  <h2 className="text-2xl font-extrabold text-ink-900 tracking-tight">Message received!</h2>
+                  <h2 className="text-2xl font-extrabold text-ink-900 tracking-tight">Almost there!</h2>
                   <p className="mt-3 text-ink-500 max-w-sm mx-auto">
-                    Thanks for reaching out, {form.name || 'friend'}. Our team will get back to you at{' '}
-                    <span className="font-bold" dir="ltr">{form.email || site.email}</span> shortly.
+                    Your email draft has been opened in your mail app for <span className="font-bold" dir="ltr">{site.email}</span>. Just hit send and we’ll get back to you at{' '}
+                    <span className="font-bold" dir="ltr">{form.email || 'your email'}</span> shortly.
                   </p>
                   <button
                     onClick={() => {
@@ -57,6 +77,11 @@ export default function Contact() {
                 <>
                   <h2 className="text-2xl font-extrabold text-ink-900 tracking-tight">Start a conversation</h2>
                   <p className="mt-2 text-sm text-ink-500">You can also email us directly at {site.email}.</p>
+                  {error && (
+                    <p role="alert" className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+                      {error}
+                    </p>
+                  )}
                   <form onSubmit={submit} className="mt-8 grid sm:grid-cols-2 gap-5">
                     <div>
                       <label htmlFor="name" className="block text-xs font-bold text-ink-700 mb-2">Full name</label>
@@ -72,7 +97,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <label htmlFor="project" className="block text-xs font-bold text-ink-700 mb-2">I’m interested in</label>
-                      <select id="project" defaultValue="Engineering & Design" className={inputCls}>
+                      <select id="project" value={form.project} onChange={update('project')} className={inputCls}>
                         {['Engineering & Design', 'Product Choice & Procurement', 'Project Management', 'Installation, Testing & Commissioning', 'Training & Certification', 'Maintenance & Support', 'Other'].map((o) => (
                           <option key={o}>{o}</option>
                         ))}

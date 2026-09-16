@@ -78,6 +78,13 @@ h6 {
   color: var(--color-ink-950);
 }
 
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ── Utilities ─────────────────────────────────────────────── */
 
 /* Section eyebrows / kicker label */
@@ -91,6 +98,17 @@ h6 {
   text-transform: uppercase;
   color: var(--color-accent-600);
   white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .eyebrow {
+    white-space: normal;
+    letter-spacing: 0.16em;
+    line-height: 1.5;
+    align-items: flex-start;
+  }
+  .eyebrow.justify-center {
+    align-items: center;
+  }
 }
 .eyebrow.on-dark {
   color: var(--color-accent-300);
@@ -120,6 +138,13 @@ h6 {
 }
 .btn:active {
   transform: translateY(1px);
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 .btn-primary {
   color: #ffffff;
