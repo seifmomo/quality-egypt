@@ -15,6 +15,11 @@ export const site = {
     { label: 'Instagram', href: 'https://www.instagram.com/egyptian_engineering_projects/?hl=en' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/company/quality-egy/' },
   ],
+  developer: {
+    name: 'Seif Eldin',
+    github: 'https://github.com/seifmomo',
+    linkedin: 'https://www.linkedin.com/in/seif-said-a9441b366/',
+  },
 }
 
 export const stats = [

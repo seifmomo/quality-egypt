@@ -15,6 +15,8 @@ Built from scratch with **React 19 + Vite 8 + Tailwind CSS 4**, deployed on **Gi
 - **Working contact form** — inline validation (email checks) plus a prefilled `mailto:` hand-off to the sales inbox
 - **SEO ready** — Open Graph + Twitter cards, canonical URL, robots meta and JSON-LD `Organization` schema
 - **Accessibility polish** — visible keyboard focus on every interactive element and `prefers-reduced-motion` support
+- **Brand socials in the footer** — Facebook, Instagram and LinkedIn with real icons and live links
+- **Developer credit** — "Website crafted by Seif Eldin" with GitHub and LinkedIn links in the footer
 - **Partner marquee**, landmark project showcase, news grid — all data-driven
 - **Fully responsive** LTR layout with sticky glass header and mobile menu
 - Deep-link friendly SPA routing (`/services/:slug`, `/references/:slug`, `/news/:slug`)
@@ -45,3 +47,7 @@ npm run deploy
 This builds the app, adds `.nojekyll`, duplicates `index.html` as `404.html` (for SPA deep links), and publishes `dist/` to the `gh-pages` branch.
 
 Live: **https://seifmomo.github.io/quality-egypt/**
+
+## 👨‍💻 Credits
+
+Website designed and developed by **Seif Eldin** — [LinkedIn](https://www.linkedin.com/in/seif-said-a9441b366/) · [GitHub](https://github.com/seifmomo)

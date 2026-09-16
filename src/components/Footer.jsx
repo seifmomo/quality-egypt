@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Mail, MapPin, Phone, ArrowUp } from 'lucide-react'
+import { FacebookIcon, InstagramIcon, LinkedInIcon } from './SocialIcons'
 import { site, nav } from '../content'
+
+const socialIcons = { Facebook: FacebookIcon, Instagram: InstagramIcon, LinkedIn: LinkedInIcon }
 
 const footerGroups = [
   {
@@ -43,18 +46,21 @@ export default function Footer() {
               procuring, installing and maintaining the systems behind Egypt’s most iconic landmarks.
             </p>
             <div className="mt-7 flex gap-2.5">
-              {site.socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.label}
-                  className="grid place-items-center h-10 w-10 rounded-full border border-white/15 text-ink-300 hover:text-ink-950 hover:bg-gold-400 hover:border-gold-400 transition-colors"
-                >
-                  <span className="text-[0.7rem] font-bold uppercase tracking-wide">{s.label[0]}</span>
-                </a>
-              ))}
+              {site.socials.map((s) => {
+                const Icon = socialIcons[s.label] || FacebookIcon
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={s.label}
+                    className="grid place-items-center h-10 w-10 rounded-full border border-white/15 text-ink-300 hover:text-ink-950 hover:bg-gold-400 hover:border-gold-400 transition-colors"
+                  >
+                    <Icon size={16} />
+                  </a>
+                )
+              })}
             </div>
           </div>
 
@@ -105,6 +111,21 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
           <p className="text-xs text-ink-400">
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
+            <span className="block mt-1.5">
+              Website crafted by{' '}
+              <a
+                href={site.developer.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-ink-200 hover:text-accent-300 transition-colors"
+              >
+                {site.developer.name}
+              </a>
+              <span className="mx-1.5 text-ink-500">·</span>
+              <a href={site.developer.github} target="_blank" rel="noreferrer" className="text-ink-300 hover:text-accent-300 transition-colors" dir="ltr">
+                @seifmomo
+              </a>
+            </span>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-5 text-xs">
             {nav.slice(1).map((n) => (
